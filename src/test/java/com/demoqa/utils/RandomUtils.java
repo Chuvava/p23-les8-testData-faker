@@ -9,8 +9,6 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class RandomUtils {
 
-    private Faker faker = new Faker();
-
     public static String getRandomString(int length) {
 
         String AB = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
