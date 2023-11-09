@@ -5,7 +5,7 @@ import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeAll;
 
 public class BaseTest {
-    static Faker faker = new Faker();
+    Faker faker = new Faker();
 
     @BeforeAll
     static void beforeAll() {
