@@ -70,7 +70,7 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage setSubject(String[] values) {
+    public RegistrationPage setSubject(String... values) {
         for(int i = 0; i < values.length; i++) {
             subject.setValue(values[i]).pressEnter();
         }
@@ -78,7 +78,7 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage setHobbies(String[] values) {
+    public RegistrationPage setHobbies(String... values) {
         for(int i = 0; i < values.length; i++) {
             hobbies.$(byText(values[i])).click();
         }

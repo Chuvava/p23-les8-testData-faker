@@ -1,7 +1,6 @@
 package com.demoqa.tests;
 
 import com.demoqa.pages.RegistrationPage;
-import com.demoqa.utils.ConvertUtils;
 import com.demoqa.utils.RandomUtils;
 import org.junit.jupiter.api.Test;
 
@@ -14,15 +13,17 @@ public class RegistrationFormTest extends BaseTest {
             email = faker.internet().emailAddress(),
             gender = RandomUtils.getRandomGender(),
             mobileNumber = faker.phoneNumber().subscriberNumber(10),
+            subjects = faker.options().option("Accounting", "Arts", "Biology", "Chemistry", "Maths",
+                    "Commerce", "Economics", "Physics", "English", "Hindi", "History", "Social Studies"),
+            hobbies = faker.options().option("Sports", "Reading", "Music"),
             pictureName = "branch.jpg",
             currentAddress = faker.address().streetAddress(),
-            state = "Haryana",
-            city = "Panipat",
-            dayOfBirth = "20",
-            monthOfBirth = "September",
-            yearOfBirth = "1994";
-    String[] subjects = new String[]{"Hindi", "Computer Science", "Economics"},
-            hobbies = new String[]{"Reading", "Music"};
+            state = RandomUtils.getRandomState(),
+            city = RandomUtils.getRandomCityAccordingToState(state),
+            dayOfBirth = String.valueOf(faker.number().numberBetween(1, 28)),
+            monthOfBirth = faker.options().option("January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"),
+            yearOfBirth = String.valueOf(faker.number().numberBetween(1980, 2005));
 
     @Test
     void successfulRegistrationTestWithFullData() {
@@ -52,8 +53,8 @@ public class RegistrationFormTest extends BaseTest {
                 .verifyInfoInFinalTable("Mobile", mobileNumber)
                 .verifyInfoInFinalTable("Date of Birth",
                         String.format("%s %s,%s", dayOfBirth, monthOfBirth, yearOfBirth))
-                .verifyInfoInFinalTable("Subjects", ConvertUtils.arrayToStringWithoutBrackets(subjects))
-                .verifyInfoInFinalTable("Hobbies", ConvertUtils.arrayToStringWithoutBrackets(hobbies))
+                .verifyInfoInFinalTable("Subjects", subjects)
+                .verifyInfoInFinalTable("Hobbies", hobbies)
                 .verifyInfoInFinalTable("Picture", pictureName)
                 .verifyInfoInFinalTable("Address", currentAddress)
                 .verifyInfoInFinalTable("State and City", String.format("%s %s", state, city));
